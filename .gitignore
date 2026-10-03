@@ -1,0 +1,6 @@
+# 不需要忽略的文件，只排除临时文件
+*.log
+.DS_Store
+Thumbs.db
+*.zip
+*-source.zip
