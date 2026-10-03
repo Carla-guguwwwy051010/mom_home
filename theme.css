@@ -1,0 +1,213 @@
+/* A quiet editorial layer over the 3D scene. Keep the scene visible and the
+   controls legible without making the page resemble a game dashboard. */
+:root {
+  --ink: #5c4b49;
+  --muted: #806b69;
+  --pink: #a97781;
+  --paper: #fffaf3;
+}
+body {
+  color: var(--ink);
+  background: #eadfd6;
+  font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+}
+#scene::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, #fff8ed20 0%, transparent 31%, transparent 69%, #826c6021 100%);
+}
+header {
+  padding-top: max(20px, env(safe-area-inset-top));
+  background: linear-gradient(180deg, #fff9f0c7, #fff9f082 60%, transparent);
+}
+.brand {
+  font-family: Georgia, "Songti SC", "SimSun", serif;
+  font-size: 22px;
+  letter-spacing: .12em;
+  color: #645054;
+  white-space: nowrap;
+  text-shadow: 0 1px 10px #fff8ef;
+}
+.brand b { color: #bd8792; font-size: 28px; }
+.meta { gap: 9px; color: #765f62; }
+.meta .date { margin-right: 10px; }
+.icon {
+  border: 1px solid #e9d8ce;
+  border-radius: 999px;
+  background: #fffaf1d9;
+  padding: 9px 15px;
+  box-shadow: 0 4px 17px #6d4e4710;
+}
+.icon[aria-pressed="true"] { background: #efe0db; border-color: #d9bab8; }
+.stage-name {
+  top: 94px;
+  font: italic 13px Georgia, serif;
+  color: #806b69;
+  letter-spacing: .11em;
+  text-shadow: 0 1px 8px #fff9ee;
+}
+.note {
+  width: min(370px, calc(100vw - 32px));
+  padding: 24px 27px 22px;
+  border: 1px solid #e5d9cc;
+  border-radius: 18px;
+  background: #fffaf2ed;
+  box-shadow: 0 16px 52px #594b3e24, 0 1px 0 #fff9 inset;
+  backdrop-filter: blur(16px);
+}
+.note::before {
+  content: "";
+  display: block;
+  width: 39px;
+  height: 2px;
+  margin-bottom: 16px;
+  background: #c6999d;
+}
+.eyebrow { color: #9d777c; font-size: 13px; letter-spacing: .12em; }
+.note h1, dialog h2 {
+  font-family: "Songti SC", "STSong", "SimSun", Georgia, serif;
+  color: #594d4b;
+  font-weight: 400;
+}
+.note h1 { font-size: 29px; line-height: 1.42; margin: 8px 0 11px; }
+.note p { color: #796a67; line-height: 1.85; }
+.actions { gap: 8px; }
+.primary, .secondary {
+  border-radius: 999px;
+  padding: 11px 18px;
+  letter-spacing: .02em;
+  transition: background-color .2s, box-shadow .2s, transform .2s;
+}
+.primary {
+  background: #a97781;
+  border-color: #a97781;
+  box-shadow: 0 5px 12px #9c707330;
+}
+.secondary {
+  background: #fffaf4;
+  border-color: #dbcac2;
+  color: #795f64;
+}
+.plain { color: #795f64; text-underline-offset: 4px; }
+.room-nav { gap: 7px; }
+.room-nav button {
+  border: 1px solid #e9dcd0;
+  border-radius: 11px;
+  background: #fffaf2e8;
+  color: #705d5d;
+  box-shadow: 0 4px 16px #6e58431a;
+  transition: background-color .2s, transform .2s;
+}
+.room-nav button[aria-current="true"] {
+  background: #b3898f;
+  border-color: #b3898f;
+  color: white;
+}
+.speech {
+  border: 1px solid #eee0d5;
+  border-radius: 16px;
+  background: #fffaf2f2;
+  color: #6b5554;
+  box-shadow: 0 8px 28px #6d53452b;
+}
+.hint, .toast {
+  border: 1px solid #efe0d4;
+  border-radius: 999px;
+  background: #fffaf1df;
+}
+.hint { color: #78645f; }
+dialog {
+  border: 1px solid #e2d1c6;
+  border-radius: 18px;
+  background: radial-gradient(circle at 20% 0%, #fffefd 0, transparent 45%), #fffaf3;
+  box-shadow: 0 28px 84px #3f2e2f57;
+}
+dialog::backdrop { background: #4d3b3f99; backdrop-filter: blur(5px); }
+.close { border-radius: 999px; background: #f4e8e1; }
+#cardDialog img {
+  border-radius: 6px;
+  border: 1px solid #eaded2;
+  background: #fbf5e9;
+}
+#cardText { color: #5d5150; }
+.album-item {
+  border-radius: 8px;
+  border-color: #eaded3;
+  box-shadow: 0 6px 20px #70505a11;
+}
+.album-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 13px; }
+.album-item img { border-radius: 4px; }
+.album-item.locked { min-height: 138px; background: #f3e9df; }
+#cardDialog[data-art="0"] { --card-accent: #b88796; }
+#cardDialog[data-art="1"] { --card-accent: #95859d; }
+#cardDialog[data-art="2"] { --card-accent: #ad8f72; }
+#cardDialog[data-art="3"] { --card-accent: #b8838d; }
+#cardDialog .card-num, #cardDialog .card-heart { color: var(--card-accent, #b88796); }
+.photo-grid figure:nth-child(odd) { transform: rotate(-1deg); }
+.photo-grid figure:nth-child(even) { transform: rotate(1deg); }
+.upload-label { border-radius: 999px; }
+@media (hover: hover) {
+  .primary:hover { background: #956670; box-shadow: 0 7px 17px #9c707345; transform: translateY(-1px); }
+  .secondary:hover, .room-nav button:hover { background: #f8ede5; transform: translateY(-1px); }
+  .room-nav button[aria-current="true"]:hover { background: #a97b82; }
+}
+@media (max-width: 700px) {
+  header { padding: max(12px, env(safe-area-inset-top)) 14px 24px; }
+  .brand { font-size: 17px; letter-spacing: .04em; }
+  .brand b { font-size: 22px; }
+  .meta { gap: 5px; }
+  .icon { padding: 7px 9px; font-size: 11px; }
+  .room-nav {
+    top: calc(60px + env(safe-area-inset-top));
+    left: 12px;
+    right: 12px;
+    display: flex;
+    flex-direction: row;
+    gap: 7px;
+    overflow-x: auto;
+    padding: 3px 2px 9px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .room-nav::-webkit-scrollbar { display: none; }
+  .room-nav button {
+    flex: 0 0 auto;
+    min-width: 0;
+    white-space: nowrap;
+    border-radius: 999px;
+    padding: 8px 12px;
+  }
+  .speech, .speech.show {
+    top: calc(116px + env(safe-area-inset-top));
+    left: 12px;
+    max-width: calc(100vw - 24px);
+    padding: 9px 13px;
+    font-size: 13px;
+  }
+  .note {
+    left: 12px;
+    right: 12px;
+    bottom: max(12px, env(safe-area-inset-bottom));
+    width: auto;
+    max-height: 41dvh;
+    overflow-y: auto;
+    padding: 15px 17px 17px;
+  }
+  .note::before { margin-bottom: 9px; width: 30px; }
+  .note h1 { font-size: 23px; margin: 5px 0 7px; }
+  .note p { font-size: 12px; line-height: 1.65; margin-bottom: 10px; }
+  .primary, .secondary { padding: 9px 13px; font-size: 12px; }
+  .album-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .album-item.locked { min-height: 118px; }
+  dialog { border-radius: 15px; }
+}
+@media (max-width: 390px) {
+  .brand { font-size: 15px; }
+  .meta .icon { padding: 7px 8px; font-size: 10px; }
+  .note { max-height: 43dvh; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .primary, .secondary, .room-nav button { transition: none; }
+}
